@@ -43,6 +43,10 @@ namespace BetSYS
             this.Status = 'a';
             this.Balance = 0;
         }
+
+        public Customer(String Email) {
+            this.Email = Email;
+        }
         public static int generateAccountID() {
             //open a db connection
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
@@ -92,41 +96,36 @@ namespace BetSYS
             //close db connection
             conn.Close();
         }
-        public Boolean SearchAccount(String Email) {
+        public Boolean SearchAccount() {
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            String sqlQuery = "SELECT * FROM Customers WHERE Email = '" + this.Email + "'";
 
-            String sqlQuery = "SELECT * FROM Customers WHERE Email = " + Email;
-            
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
             conn.Open();
 
             OracleDataReader reader = cmd.ExecuteReader();
-            
-            Email = reader.GetString(0);
             reader.Read();
-
-            if (reader.IsDBNull(0)) {
-                return false;
-            }
-            else {
-                return true;
-            }
-
             cmd.ExecuteNonQuery();
-            conn.Close();
+
+            //if (reader.IsDBNull(0)) { 
+              //  conn.Close();
+                //return false;
+            //}
+            //else {
+                conn.Close();
+                return true;
+            //}
+
+            
         }
-        public void CloseAccount (String Email) {
+        public void CloseAccount () {
+            Console.WriteLine(this.Email);
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
 
-            String sqlQuery = "UPDATE Customers " +
-                "SET Status = 'c'" +
-                "WHERE Email = " + Email;
+            String sqlQuery = "UPDATE Customers SET Status = 'c' WHERE Email = '" + this.Email + "'";
 
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
             conn.Open();
-
-            OracleDataReader reader = cmd.ExecuteReader();
-
             
 
             cmd.ExecuteNonQuery();

@@ -61,9 +61,10 @@ namespace BettingSYS
             }
 
             else {
-                Customer closeAccount = new Customer();
+                Email = txtEmail.Text;
+                Customer closeAccount = new Customer(Email);
 
-                Boolean isAnAccount = closeAccount.SearchAccount(Email);
+                Boolean isAnAccount = closeAccount.SearchAccount();
 
                 if (isAnAccount == false) {
                     MessageBox.Show("This account does not exist. Please enter a regestered email.", "Account Not Found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -72,7 +73,7 @@ namespace BettingSYS
                 else {
                     DialogResult dialog = MessageBox.Show("Are You sure you want to delete this account?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (dialog == DialogResult.Yes) {
-                        closeAccount.CloseAccount(Email);
+                        closeAccount.CloseAccount();
                         MessageBox.Show("The account has been closed", "Account Closed", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         txtEmail.Clear();
                     }  
