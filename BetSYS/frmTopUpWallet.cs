@@ -9,6 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace BettingSYS
@@ -54,10 +55,25 @@ namespace BettingSYS
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
+            String Email = txtAccountEmail.Text;
             String CardNo = txtCardNo.Text;
             DateTime ExpiryDate = dtpExpiryDate.Value;
             String Cvc = txtCVC.Text;
             int moneyOut = cboMoneyOptions.SelectedIndex;
+
+            if (Email.EndsWith(".com") == false && Email.EndsWith(".ie") == false)
+            {
+                MessageBox.Show("This is not a valid email. An email must end with .ie or .com", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtAccountEmail.Focus();
+                return;
+            }
+            if (Email.Contains("@outlook") == false && Email.Contains("@gmail") == false &&
+               Email.Contains("@icloud") == false)
+            {
+                MessageBox.Show("This is not a valid email. An email must contain a domain name", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtAccountEmail.Focus();
+                return;
+            }
 
             if (CardNo.Length != 16) {
                 MessageBox.Show("Card number must be 16 digits long.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);

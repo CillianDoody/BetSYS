@@ -39,6 +39,8 @@
             this.mnuBackToMenu = new System.Windows.Forms.MenuStrip();
             this.mnuBack = new System.Windows.Forms.ToolStripMenuItem();
             this.dtpExpiryDate = new System.Windows.Forms.DateTimePicker();
+            this.txtAccountEmail = new System.Windows.Forms.TextBox();
+            this.lblAccountEmail = new System.Windows.Forms.Label();
             this.mnuBackToMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +75,7 @@
             // lblCardNo
             // 
             this.lblCardNo.AutoSize = true;
-            this.lblCardNo.Location = new System.Drawing.Point(98, 71);
+            this.lblCardNo.Location = new System.Drawing.Point(98, 137);
             this.lblCardNo.Name = "lblCardNo";
             this.lblCardNo.Size = new System.Drawing.Size(72, 13);
             this.lblCardNo.TabIndex = 2;
@@ -82,7 +84,7 @@
             // 
             // txtCardNo
             // 
-            this.txtCardNo.Location = new System.Drawing.Point(386, 68);
+            this.txtCardNo.Location = new System.Drawing.Point(386, 134);
             this.txtCardNo.MaxLength = 16;
             this.txtCardNo.Name = "txtCardNo";
             this.txtCardNo.Size = new System.Drawing.Size(289, 20);
@@ -91,7 +93,7 @@
             // lblExpiryDate
             // 
             this.lblExpiryDate.AutoSize = true;
-            this.lblExpiryDate.Location = new System.Drawing.Point(98, 131);
+            this.lblExpiryDate.Location = new System.Drawing.Point(98, 180);
             this.lblExpiryDate.Name = "lblExpiryDate";
             this.lblExpiryDate.Size = new System.Drawing.Size(64, 13);
             this.lblExpiryDate.TabIndex = 4;
@@ -100,7 +102,7 @@
             // lblCVC
             // 
             this.lblCVC.AutoSize = true;
-            this.lblCVC.Location = new System.Drawing.Point(98, 196);
+            this.lblCVC.Location = new System.Drawing.Point(98, 226);
             this.lblCVC.Name = "lblCVC";
             this.lblCVC.Size = new System.Drawing.Size(29, 13);
             this.lblCVC.TabIndex = 6;
@@ -108,7 +110,7 @@
             // 
             // txtCVC
             // 
-            this.txtCVC.Location = new System.Drawing.Point(386, 189);
+            this.txtCVC.Location = new System.Drawing.Point(386, 219);
             this.txtCVC.MaxLength = 3;
             this.txtCVC.Name = "txtCVC";
             this.txtCVC.Size = new System.Drawing.Size(70, 20);
@@ -145,16 +147,33 @@
             // dtpExpiryDate
             // 
             this.dtpExpiryDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpExpiryDate.Location = new System.Drawing.Point(386, 131);
+            this.dtpExpiryDate.Location = new System.Drawing.Point(386, 180);
             this.dtpExpiryDate.Name = "dtpExpiryDate";
             this.dtpExpiryDate.Size = new System.Drawing.Size(83, 20);
             this.dtpExpiryDate.TabIndex = 10;
+            // 
+            // txtAccountEmail
+            // 
+            this.txtAccountEmail.Location = new System.Drawing.Point(386, 85);
+            this.txtAccountEmail.Name = "txtAccountEmail";
+            this.txtAccountEmail.Size = new System.Drawing.Size(289, 20);
+            this.txtAccountEmail.TabIndex = 0;
+            // 
+            // lblAccountEmail
+            // 
+            this.lblAccountEmail.Location = new System.Drawing.Point(98, 91);
+            this.lblAccountEmail.Name = "lblAccountEmail";
+            this.lblAccountEmail.Size = new System.Drawing.Size(84, 14);
+            this.lblAccountEmail.TabIndex = 1;
+            this.lblAccountEmail.Text = "Account Email:";
             // 
             // frmTopUpWallet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtAccountEmail);
+            this.Controls.Add(this.lblAccountEmail);
             this.Controls.Add(this.dtpExpiryDate);
             this.Controls.Add(this.mnuBackToMenu);
             this.Controls.Add(this.btnConfirm);
@@ -188,5 +207,7 @@
         private System.Windows.Forms.MenuStrip mnuBackToMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuBack;
         private System.Windows.Forms.DateTimePicker dtpExpiryDate;
+        private System.Windows.Forms.TextBox txtAccountEmail;
+        private System.Windows.Forms.Label lblAccountEmail;
     }
 }

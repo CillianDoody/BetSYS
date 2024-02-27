@@ -107,14 +107,14 @@ namespace BetSYS
             reader.Read();
             cmd.ExecuteNonQuery();
 
-            //if (reader.IsDBNull(0)) { 
-              //  conn.Close();
-                //return false;
-            //}
-            //else {
+            if (!reader.HasRows) { 
+                conn.Close();
+                return false;
+            }
+            else {
                 conn.Close();
                 return true;
-            //}
+            }
 
             
         }
@@ -127,6 +127,21 @@ namespace BetSYS
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
             conn.Open();
             
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
+       public void AddBalance() {
+            Console.WriteLine(this.Email);
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            Balance = 
+
+            String sqlQuery = "UPDATE Customers SET balance = '" + this.Ammount + "'WHERE Email = '" + this.Email + "'";
+
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+
 
             cmd.ExecuteNonQuery();
             conn.Close();
