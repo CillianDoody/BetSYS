@@ -59,7 +59,7 @@ namespace BettingSYS
             String CardNo = txtCardNo.Text;
             DateTime ExpiryDate = dtpExpiryDate.Value;
             String Cvc = txtCVC.Text;
-            int moneyOut = cboMoneyOptions.SelectedIndex;
+            int moneyToAdd = cboMoneyOptions.SelectedIndex;
 
             if (Email.EndsWith(".com") == false && Email.EndsWith(".ie") == false)
             {
@@ -105,19 +105,31 @@ namespace BettingSYS
                 return;
             }
 
-            if (moneyOut == -1){
+            if (moneyToAdd == -1){
                 MessageBox.Show("Please select a value", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboMoneyOptions.Focus();
                 return;
             }
 
-            else {
-                MessageBox.Show("Money has been added to the account.", "Money Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtCardNo.Clear();
-                txtCVC.Clear();
-                dtpExpiryDate.Value = DateTime.Today;
-                cboMoneyOptions.SelectedIndex = -1;
-                cboMoneyOptions.Text = "Please select the ammount you wish to add to the wallet";
+            else { 
+                Customer closeAccount = new Customer(Email);
+
+                Boolean isAnAccount = closeAccount.SearchAccount();
+
+                if (isAnAccount == false) {
+                    MessageBox.Show("This account does not exist. Please enter a regestered email.", "Account Not Found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtAccountEmail.Clear();
+                }
+                else {
+                    Customer topUpBalance = new Customer(Email);
+                    topUpBalance.TopUpBalance(moneyToAdd);
+                    MessageBox.Show("Money has been added to the account.", "Money Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtCardNo.Clear();
+                    txtCVC.Clear();
+                    dtpExpiryDate.Value = DateTime.Today;
+                    cboMoneyOptions.SelectedIndex = -1;
+                    cboMoneyOptions.Text = "Please select the ammount you wish to add to the wallet";
+                }
             }
 
         }

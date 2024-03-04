@@ -131,19 +131,25 @@ namespace BetSYS
             cmd.ExecuteNonQuery();
             conn.Close();
         }
-
-       public void AddBalance() {
-            Console.WriteLine(this.Email);
+        public void TopUpBalance(double Balance) {
+            this.Balance = Balance;
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
-            Balance = 
-
-            String sqlQuery = "UPDATE Customers SET balance = '" + this.Ammount + "'WHERE Email = '" + this.Email + "'";
-
+            String sqlQuery = "SELECT Balance FROM Customers WHERE Email = '" + this.Email + "'";
+            
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
             conn.Open();
 
 
-            cmd.ExecuteNonQuery();
+            double currentBalance = (double)cmd.ExecuteNonQuery();
+            conn.Close();
+
+            String sqlQuery2 = "UPDATE Customers SET balance = '" + currentBalance + this.Balance + "'WHERE Email = '" + this.Email + "'";
+
+            OracleCommand cmd2 = new OracleCommand(sqlQuery2, conn);
+            conn.Open();
+
+
+            cmd2.ExecuteNonQuery();
             conn.Close();
         }
     }
