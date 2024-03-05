@@ -59,7 +59,8 @@ namespace BettingSYS
             String CardNo = txtCardNo.Text;
             DateTime ExpiryDate = dtpExpiryDate.Value;
             String Cvc = txtCVC.Text;
-            int moneyToAdd = cboMoneyOptions.SelectedIndex;
+            int moneyIndex = cboMoneyOptions.SelectedIndex;
+            double moneyToAdd = Convert.ToDouble(cboMoneyOptions.Text);
 
             if (Email.EndsWith(".com") == false && Email.EndsWith(".ie") == false)
             {
@@ -105,7 +106,7 @@ namespace BettingSYS
                 return;
             }
 
-            if (moneyToAdd == -1){
+            if (moneyIndex == -1){
                 MessageBox.Show("Please select a value", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cboMoneyOptions.Focus();
                 return;

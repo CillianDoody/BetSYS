@@ -139,11 +139,11 @@ namespace BetSYS
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
             conn.Open();
 
-
             double currentBalance = (double)cmd.ExecuteNonQuery();
+            double newBalance = currentBalance + this.Balance;
             conn.Close();
 
-            String sqlQuery2 = "UPDATE Customers SET balance = '" + currentBalance + this.Balance + "'WHERE Email = '" + this.Email + "'";
+            String sqlQuery2 = "UPDATE Customers SET balance = '" + newBalance + "' WHERE Email = '" + this.Email + "'";
 
             OracleCommand cmd2 = new OracleCommand(sqlQuery2, conn);
             conn.Open();

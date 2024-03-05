@@ -58,13 +58,13 @@
             this.cboMoneyOptions.DisplayMember = "5";
             this.cboMoneyOptions.FormattingEnabled = true;
             this.cboMoneyOptions.Items.AddRange(new object[] {
-            "€5.00",
-            "€10.00",
-            "€25.00",
-            "€50.00",
-            "€100.00",
-            "€200.00",
-            "€250.00"});
+            "5.00",
+            "10.00",
+            "25.00",
+            "50.00",
+            "100.00",
+            "200.00",
+            "250.00"});
             this.cboMoneyOptions.Location = new System.Drawing.Point(386, 260);
             this.cboMoneyOptions.Name = "cboMoneyOptions";
             this.cboMoneyOptions.Size = new System.Drawing.Size(289, 21);
