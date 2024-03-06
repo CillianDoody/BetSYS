@@ -138,8 +138,12 @@ namespace BetSYS
             
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
             conn.Open();
+            OracleDataReader reader = cmd.ExecuteReader();
 
-            double currentBalance = (double)cmd.ExecuteNonQuery();
+            double currentBalance;
+            reader.Read();
+
+            currentBalance = Convert.ToDouble(reader.GetString(0));
             double newBalance = currentBalance + this.Balance;
             conn.Close();
 
