@@ -30,3 +30,26 @@ FTime TIMESTAMP NOT NULL,
 Score1 numeric(2),
 Score2 numeric(2),
 CONSTRAINT PK_FixtureID PRIMARY KEY (FixtureID));
+
+INSERT INTO Teams (TeamID, TeamName)
+VALUES
+('1', 'Arsenal'),
+('2', 'Aston Villa'),
+('3', 'Bournemouth'),
+('4', 'Brentford'),
+('5', 'Brighton & Hove Albion'),
+('6', 'Burnley'),
+('7', 'Chelsea'),
+('8', 'Crystal Palace'),
+('9', 'Everton'),
+('10', 'Fulham'),
+('11', 'Liverpool'),
+('12', 'Luton Town'),
+('13', 'Manchester City'),
+('14', 'Manchester United'),
+('15', 'Newcastle United'),
+('16', 'Nottingham Forest'),
+('17', 'Sheffield United'),
+('18', 'Tottenham Hotspur'),
+('19', 'West Ham United'),
+('20', 'Wolverhampton Wanderers');
