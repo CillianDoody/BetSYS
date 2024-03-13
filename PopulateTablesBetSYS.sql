@@ -31,66 +31,66 @@ VALUES
 'smurfyboy3000@gmail.com', 'v92na40', 'a', 0.00);
 
 --Populating table Teams.
-INSERT INTO Teams (TeamID, TeamName)
+INSERT INTO Teams (TeamName)
 VALUES
-('1', 'Arsenal');
-INSERT INTO Teams (TeamID, TeamName)
+('Arsenal');
+INSERT INTO Teams (TeamName)
 VALUES
-('2', 'Aston Villa');
-INSERT INTO Teams (TeamID, TeamName)
+('Aston Villa');
+INSERT INTO Teams (TeamName)
 VALUES
-('3', 'Bournemouth');
-INSERT INTO Teams (TeamID, TeamName)
+('Bournemouth');
+INSERT INTO Teams (TeamName)
 VALUES
-('4', 'Brentford');
-INSERT INTO Teams (TeamID, TeamName)
+('Brentford');
+INSERT INTO Teams (TeamName)
 VALUES
-('5', 'Brighton and Hove Albion');
-INSERT INTO Teams (TeamID, TeamName)
+('Brighton and Hove Albion');
+INSERT INTO Teams (TeamName)
 VALUES
-('6', 'Burnley');
-INSERT INTO Teams (TeamID, TeamName)
+('Burnley');
+INSERT INTO Teams (TeamName)
 VALUES
-('7', 'Chelsea');
-INSERT INTO Teams (TeamID, TeamName)
+('Chelsea');
+INSERT INTO Teams (TeamName)
 VALUES
-('8', 'Crystal Palace');
-INSERT INTO Teams (TeamID, TeamName)
+('Crystal Palace');
+INSERT INTO Teams (TeamName)
 VALUES
-('9', 'Everton');
-INSERT INTO Teams (TeamID, TeamName)
+('Everton');
+INSERT INTO Teams (TeamName)
 VALUES
-('10', 'Fulham');
-INSERT INTO Teams (TeamID, TeamName)
+('Fulham');
+INSERT INTO Teams (TeamName)
 VALUES
-('11', 'Liverpool');
-INSERT INTO Teams (TeamID, TeamName)
+('Liverpool');
+INSERT INTO Teams (TeamName)
 VALUES
-('12', 'Luton Town');
-INSERT INTO Teams (TeamID, TeamName)
+('Luton Town');
+INSERT INTO Teams (TeamName)
 VALUES
-('13', 'Manchester City');
-INSERT INTO Teams (TeamID, TeamName)
+('Manchester City');
+INSERT INTO Teams (TeamName)
 VALUES
-('14', 'Manchester United');
-INSERT INTO Teams (TeamID, TeamName)
+('Manchester United');
+INSERT INTO Teams (TeamName)
 VALUES
-('15', 'Newcastle United');
-INSERT INTO Teams (TeamID, TeamName)
+('Newcastle United');
+INSERT INTO Teams (TeamName)
 VALUES
-('16', 'Nottingham Forest');
-INSERT INTO Teams (TeamID, TeamName)
+('Nottingham Forest');
+INSERT INTO Teams (TeamName)
 VALUES
-('17', 'Sheffield United');
-INSERT INTO Teams (TeamID, TeamName)
+('Sheffield United');
+INSERT INTO Teams (TeamName)
 VALUES
-('18', 'Tottenham Hotspur');
-INSERT INTO Teams (TeamID, TeamName)
+('Tottenham Hotspur');
+INSERT INTO Teams (TeamName)
 VALUES
-('19', 'West Ham United');
-INSERT INTO Teams (TeamID, TeamName)
+('West Ham United');
+INSERT INTO Teams (TeamName)
 VALUES
-('20', 'Wolverhampton Wanderers');
+('Wolverhampton Wanderers');
 
 --Populating table FixtureTimes
 INSERT INTO FixtureTimes (FixtureTime)

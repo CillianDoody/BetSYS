@@ -19,9 +19,8 @@ CONSTRAINT PK_AccountID PRIMARY KEY (AccountID));
 
 --Creating table Teams
 CREATE TABLE Teams(
-TeamID varchar2(3) NOT NULL,
 TeamName varchar2(25) NOT NULL,
-CONSTRAINT PK_TeamID PRIMARY KEY (TeamID));
+CONSTRAINT PK_TeamName PRIMARY KEY (TeamName));
 
 --Creating table FixtureTimes
 CREATE TABLE FixtureTimes (
@@ -40,6 +39,8 @@ FTime char(5) NOT NULL,
 Score1 numeric(2),
 Score2 numeric(2),
 CONSTRAINT PK_FixtureID PRIMARY KEY (FixtureID),
-FOREIGN KEY (FTime) REFERENCES FixtureTimes(FixtureTime));
+FOREIGN KEY (FTime) REFERENCES FixtureTimes(FixtureTime),
+FOREIGN KEY (Team1) REFERENCES Teams(TeamName),
+FOREIGN KEY (Team2) REFERENCES Teams(TeamName));
 
 COMMIT;
