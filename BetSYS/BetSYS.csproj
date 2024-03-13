@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="Customer.cs" />
     <Compile Include="DBConnect.cs" />
+    <Compile Include="Fixture.cs" />
     <Compile Include="frmCancelBet.cs">
       <SubType>Form</SubType>
     </Compile>
