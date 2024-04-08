@@ -124,47 +124,36 @@ VALUES
 INSERT INTO Fixtures (FixtureID, Team1, Team2, OddsTeam1, OddsTeam2,
 Fdate, FTime, Score1, Score2)
 VALUES
-('2', 'Bournemouth', 'Everton', 1.40, 3.33,
+('2', 'Bournemouth', 'Everton', 1.69, 2.50,
 '30-MAR-2024', '15:00', '0', '0');
 INSERT INTO Fixtures (FixtureID, Team1, Team2, OddsTeam1, OddsTeam2,
 Fdate, FTime, Score1, Score2)
 VALUES
-('3', 'Chelsea', 'Burnley', 1.40, 3.33,
+('3', 'Chelsea', 'Burnley', 1.50, 3.00,
 '30-MAR-2024', '15:00', '0', '0');
 INSERT INTO Fixtures (FixtureID, Team1, Team2, OddsTeam1, OddsTeam2,
 Fdate, FTime, Score1, Score2)
 VALUES
-('4', 'Nottingham Forest', 'Crystal Palace', 1.40, 3.33,
+('4', 'Nottingham Forest', 'Crystal Palace', 1.80, 2.50,
 '30-MAR-2024', '15:00', '0', '0');
-INSERT INTO Fixtures (FixtureID, Team1, Team2, OddsTeam1, OddsTeam2,
-Fdate, FTime, Score1, Score2)
+
+--Populating bets table
+INSERT INTO Bets (BetID, BetAmmount, BetOdds, BetStatus, Team, FixtureID,
+AccountID)
 VALUES
-('5', 'Sheffield United', 'Fulham', 1.40, 3.33,
-'30-MAR-2024', '15:00', '0', '0');
-INSERT INTO Fixtures (FixtureID, Team1, Team2, OddsTeam1, OddsTeam2,
-Fdate, FTime, Score1, Score2)
+('1', 5, 1.50, 'p', 'Chelsea', '3', '4');
+INSERT INTO Bets (BetID, BetAmmount, BetOdds, BetStatus, Team, FixtureID,
+AccountID)
 VALUES
-('6', 'Tottenham Hotspur', 'Luton Town', 1.40, 3.33,
-'30-MAR-2024', '15:00', '0', '0');
-INSERT INTO Fixtures (FixtureID, Team1, Team2, OddsTeam1, OddsTeam2,
-Fdate, FTime, Score1, Score2)
+('2', 20, 1.69, 'p', 'Bournemouth', '2', '5');
+INSERT INTO Bets (BetID, BetAmmount, BetOdds, BetStatus, Team, FixtureID,
+AccountID)
 VALUES
-('7', 'Aston Villa', 'Wolverhampton Wanderers', 1.40, 3.33,
-'30-MAR-2024', '17:30', '0', '0');
-INSERT INTO Fixtures (FixtureID, Team1, Team2, OddsTeam1, OddsTeam2,
-Fdate, FTime, Score1, Score2)
+('3', 10, 2.50, 'c', 'Crystal Palace', '4', '1');
+INSERT INTO Bets (BetID, BetAmmount, BetOdds, BetStatus, Team, FixtureID,
+AccountID)
 VALUES
-('8', 'Brentford', 'Manchester United', 1.40, 3.33,
-'30-MAR-2024', '20:00', '0', '0');
-INSERT INTO Fixtures (FixtureID, Team1, Team2, OddsTeam1, OddsTeam2,
-Fdate, FTime, Score1, Score2)
-VALUES
-('9', 'Liverpool', 'Brighton and Hove Albion', 1.40, 3.33,
-'31-MAR-2024', '14:00', '0', '0');
-INSERT INTO Fixtures (FixtureID, Team1, Team2, OddsTeam1, OddsTeam2,
-Fdate, FTime, Score1, Score2)
-VALUES
-('10', 'Manchester City', 'Arsenal', 1.40, 3.33,
-'31-MAR-2024', '16:30', '0', '0');
+('4', 500, 3.33, 'p', 'West Ham United', '1', '3');
+
 
 COMMIT;
