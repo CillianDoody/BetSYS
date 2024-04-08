@@ -1,4 +1,5 @@
 --dropping tables
+DROP TABLE Bets;
 DROP TABLE Fixtures;
 DROP TABLE FixtureTimes;
 DROP TABLE Teams;
@@ -42,5 +43,17 @@ CONSTRAINT PK_FixtureID PRIMARY KEY (FixtureID),
 FOREIGN KEY (FTime) REFERENCES FixtureTimes(FixtureTime),
 FOREIGN KEY (Team1) REFERENCES Teams(TeamName),
 FOREIGN KEY (Team2) REFERENCES Teams(TeamName));
+
+CREATE TABLE Bets(
+BetID varchar2(10) NOT NULL,
+BetAmmount numeric (5,2) NOT NULL,
+BetOdds numeric (4,2) NOT NULL,
+BetStatus char(1) NOT NULL,
+Team varchar2(25) NOT NULL,
+FixtureID varchar2(10) NOT NULL,
+AccountID varchar2(10) NOT NULL,
+FOREIGN KEY (Team) REFERENCES Teams(TeamName),
+FOREIGN KEY (FixtureID) REFERENCES Fixtures(FixtureID),
+FOREIGN KEY (AccountID) REFERENCES Customers(AccountID));
 
 COMMIT;
