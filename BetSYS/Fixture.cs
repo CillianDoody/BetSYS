@@ -44,6 +44,10 @@ namespace BetSYS
             this.score2 = 0;
         }
 
+        public Fixture(int fixtureID) { 
+            this.fixtureID = fixtureID;
+        }
+
         public static DataSet fillTeams()
         {
             //Open a db connection
@@ -86,6 +90,30 @@ namespace BetSYS
 
             return ds;
         }
+
+        public static DataSet fillFixtureIds()
+        {
+            //Open a db connection
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            //Define the SQL query to be executed
+            String sqlQuery = "SELECT * FROM Fixtures";
+
+            //Execute the SQL query (OracleCommand)
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+
+            DataSet ds = new DataSet();
+            da.Fill(ds, "FixtureID");
+
+            //Close db connection
+            conn.Close();
+
+            return ds;
+        }
+
+
         public static int generateFixtureID()
         {
             //open a db connection
@@ -139,6 +167,26 @@ namespace BetSYS
 
             //close db connection
             conn.Close();
+        }
+        public string displayFixture(int fixtureID) {
+            this.fixtureID = fixtureID;
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            String sqlQuery = "SELECT Team1 FROM Fixtures WHERE FixutreID = " + this.fixtureID;
+            String sqlQuery2 = "SELECT Team2 FROM Fixtures WHERE FixutreID = " + this.fixtureID;
+
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            reader.Read();
+
+            String Team1 = reader.GetString(0);
+            String Team2 = reader.GetString(1);
+            conn.Close();
+
+            String label = Team1 + "vs " + Team2;
+
+            return label;
         }
     }
 

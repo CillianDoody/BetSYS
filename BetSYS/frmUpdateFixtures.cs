@@ -52,6 +52,9 @@ namespace BettingSYS
             }
             else {
                 grpUpdateFixtures.Visible = true;
+                int fixtureID = Convert.ToInt32(cboSelectFixture.SelectedText);
+                Fixture updateFixture = new Fixture(fixtureID);
+                String lable = Fixture.displayFixture(fixtureID);
             }
         }
 
@@ -77,10 +80,22 @@ namespace BettingSYS
         private void frmUpdateFixtures_Load(object sender, EventArgs e)
         {
             dtpFixtureDate.MinDate = DateTime.Today;
-        }
 
-        private void label1_Click_1(object sender, EventArgs e)
-        {
+            //Load times into ComboBox
+            DataSet ds = Fixture.fillTimes();
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                cboFixtureTime.Items.Add(ds.Tables[0].Rows[i][0]);
+            }
+
+            //Load IDs into ComboBox
+            DataSet ds2 = Fixture.fillFixtureIds();
+
+            for (int i = 0; i < ds2.Tables[0].Rows.Count; i++)
+            {
+                cboSelectFixture.Items.Add(ds2.Tables[0].Rows[i][0]);
+            }
 
         }
     }
