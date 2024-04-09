@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +36,109 @@ namespace BetSYS
             this.fixtureID = 0;
             this.Team1 = "";
             this.Team2 = "";
+            this.OddsTeam1 = 0.00;
+            this.OddsTeam2 = 0.00;
+            this.FDate = DateTime.Today;
+            this.FTime = "";
+            this.score1 = 0;
+            this.score2 = 0;
+        }
+
+        public static DataSet fillTeams()
+        {
+            //Open a db connection
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            //Define the SQL query to be executed
+            String sqlQuery = "SELECT * FROM Teams";
+
+            //Execute the SQL query (OracleCommand)
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+
+            DataSet ds = new DataSet();
+            da.Fill(ds, "teams");
+
+            //Close db connection
+            conn.Close();
+
+            return ds;
+        }
+        public static DataSet fillTimes()
+        {
+            //Open a db connection
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            //Define the SQL query to be executed
+            String sqlQuery = "SELECT * FROM FixtureTimes";
+
+            //Execute the SQL query (OracleCommand)
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+
+            DataSet ds = new DataSet();
+            da.Fill(ds, "FixtureTimes");
+
+            //Close db connection
+            conn.Close();
+
+            return ds;
+        }
+        public static int generateFixtureID()
+        {
+            //open a db connection
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            //selecting the highest value fixture ID
+            String sqlQuery = "SELECT MAX(FixtureID) FROM Fixtures";
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            int FixtureID;
+            reader.Read();
+
+            if (reader.IsDBNull(0))
+            {
+                FixtureID = 1;
+            }
+            else
+            {
+                FixtureID = Convert.ToInt32(reader.GetString(0)) + 1;
+            }
+            conn.Close();
+
+            return FixtureID;
+        }
+
+        public void addFixture()
+        {
+            //open a db connection
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            //Inserting values into table
+            String sqlQuery = "INSERT INTO Fixtures Values ('" +
+                this.fixtureID + "', '" +
+                this.Team1 + "', '" +
+                this.Team2 + "', '" +
+                this.OddsTeam1 + "', '" +
+                this.OddsTeam2 + "', '" +
+                this.FDate.ToString("dd-MMM-yyyy") + "', '" +
+                this.FTime + "', '" + 
+                this.score1 + "', '" +
+                this.score2 + "')";
+
+            //execute sql query
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+
+            cmd.ExecuteNonQuery();
+
+            //close db connection
+            conn.Close();
         }
     }
 
