@@ -3,7 +3,7 @@ INSERT INTO Customers (AccountID, Forename, Surname, DOB, PhoneNumber,
 Email, Postcode, Status, Balance)
 VALUES
 ('1', 'Cillian', 'Doody', '24-JUN-2002', '0874667264',
-'cillian@gmail.com', 'p51k1c6', 'a', 0.00);
+'cillian@gmail.com', 'p51k1c6', 'a', 499.00);
 INSERT INTO Customers (AccountID, Forename, Surname, DOB, PhoneNumber,
 Email, Postcode, Status, Balance)
 VALUES
@@ -117,43 +117,54 @@ VALUES
 
 --Populating table Fixtures.
 INSERT INTO Fixtures (FixtureID, Team1, Team2, OddsTeam1, OddsTeam2,
-Fdate, FTime, Score1, Score2)
+Fdate, FTime, Score1, Score2, FStatus)
 VALUES
 ('1', 'Newcastle United', 'West Ham United', 1.40, 3.33,
-'30-MAR-2024', '12:30', '0', '0');
+'30-MAR-2024', '12:30', '0', '1', 'P');
 INSERT INTO Fixtures (FixtureID, Team1, Team2, OddsTeam1, OddsTeam2,
-Fdate, FTime, Score1, Score2)
+Fdate, FTime, Score1, Score2, FStatus)
 VALUES
 ('2', 'Bournemouth', 'Everton', 1.69, 2.50,
-'30-MAR-2024', '15:00', '0', '0');
+'30-MAR-2024', '15:00', '0', '0', 'U');
 INSERT INTO Fixtures (FixtureID, Team1, Team2, OddsTeam1, OddsTeam2,
-Fdate, FTime, Score1, Score2)
+Fdate, FTime, Score1, Score2, FStatus)
 VALUES
 ('3', 'Chelsea', 'Burnley', 1.50, 3.00,
-'30-MAR-2024', '15:00', '0', '0');
+'30-MAR-2024', '15:00', '0', '0', 'U');
 INSERT INTO Fixtures (FixtureID, Team1, Team2, OddsTeam1, OddsTeam2,
-Fdate, FTime, Score1, Score2)
+Fdate, FTime, Score1, Score2, FStatus)
 VALUES
 ('4', 'Nottingham Forest', 'Crystal Palace', 1.80, 2.50,
-'30-MAR-2024', '15:00', '0', '0');
+'30-MAR-2024', '15:00', '0', '0', 'U');
 
 --Populating bets table
-INSERT INTO Bets (BetID, BetAmmount, BetOdds, BetStatus, BetDate, Team, FixtureID,
+INSERT INTO Bets (BetID, BetAmount, BetOdds, BetStatus, BetDate, Team, FixtureID,
 AccountID)
 VALUES
-('1', 5, 1.50, 'p', '30-Jan-2021', 'Chelsea', '3', '4');
-INSERT INTO Bets (BetID, BetAmmount, BetOdds, BetStatus, Team, FixtureID,
+('1', 5, 1.50, 'w', '30-JAN-2022', 'Chelsea', '3', '4');
+INSERT INTO Bets (BetID, BetAmount, BetOdds, BetStatus, BetDate, Team, FixtureID,
 AccountID)
 VALUES
-('2', 20, 1.69, 'p', 'Bournemouth', '2', '5');
-INSERT INTO Bets (BetID, BetAmmount, BetOdds, BetStatus, Team, FixtureID,
+('2', 20, 1.69, 'l', '26-AUG-2022', 'Bournemouth', '2', '5');
+INSERT INTO Bets (BetID, BetAmount, BetOdds, BetStatus, BetDate, Team, FixtureID,
 AccountID)
 VALUES
-('3', 10, 2.50, 'c', 'Crystal Palace', '4', '1');
-INSERT INTO Bets (BetID, BetAmmount, BetOdds, BetStatus, Team, FixtureID,
+('3', 10, 2.50, 'p', '30-JAN-2023', 'Crystal Palace', '4', '1');
+INSERT INTO Bets (BetID, BetAmount, BetOdds, BetStatus, BetDate, Team, FixtureID,
 AccountID)
 VALUES
-('4', 500, 3.33, 'p', 'West Ham United', '1', '3');
-
+('4', 500, 3.33, 'c', '14-APR-2024', 'West Ham United', '1', '3');
+INSERT INTO Bets (BetID, BetAmount, BetOdds, BetStatus, BetDate, Team, FixtureID,
+AccountID)
+VALUES
+('5', 10, 2.50, 'p', '30-JAN-2023', 'Crystal Palace', '4', '2');
+INSERT INTO Bets (BetID, BetAmount, BetOdds, BetStatus, BetDate, Team, FixtureID,
+AccountID)
+VALUES
+('6', 10, 2.50, 'p', '30-JAN-2023', 'Crystal Palace', '4', '3');
+INSERT INTO Bets (BetID, BetAmount, BetOdds, BetStatus, BetDate, Team, FixtureID,
+AccountID)
+VALUES
+('7', 10, 2.50, 'p', '30-JAN-2023', 'Nottingham Forest', '4', '4');
 
 COMMIT;
