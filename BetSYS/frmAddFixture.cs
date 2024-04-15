@@ -195,7 +195,7 @@ namespace BettingSYS
             else
             { 
                 Fixture AddFixture = new Fixture(Fixture.generateFixtureID(), Team1AsStr, Team2AsStr, OddsTeam1AsDouble,
-                    OddsTeam2AsDouble, fixtureDate, FixtureTimeAsStr, 0, 0);
+                    OddsTeam2AsDouble, fixtureDate, FixtureTimeAsStr, 0, 0, 'U');
 
                 AddFixture.addFixture();
                 MessageBox.Show("This Fixture was added.", "Fixture added", MessageBoxButtons.OK, MessageBoxIcon.Information);

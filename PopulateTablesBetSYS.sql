@@ -138,10 +138,10 @@ VALUES
 '30-MAR-2024', '15:00', '0', '0');
 
 --Populating bets table
-INSERT INTO Bets (BetID, BetAmmount, BetOdds, BetStatus, Team, FixtureID,
+INSERT INTO Bets (BetID, BetAmmount, BetOdds, BetStatus, BetDate, Team, FixtureID,
 AccountID)
 VALUES
-('1', 5, 1.50, 'p', 'Chelsea', '3', '4');
+('1', 5, 1.50, 'p', '30-Jan-2021', 'Chelsea', '3', '4');
 INSERT INTO Bets (BetID, BetAmmount, BetOdds, BetStatus, Team, FixtureID,
 AccountID)
 VALUES

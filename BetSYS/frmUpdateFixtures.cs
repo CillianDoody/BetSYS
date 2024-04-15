@@ -52,28 +52,38 @@ namespace BettingSYS
             }
             else {
                 grpUpdateFixtures.Visible = true;
-                int fixtureID = Convert.ToInt32(cboSelectFixture.SelectedText);
-                Fixture updateFixture = new Fixture(fixtureID);
-                String lable = Fixture.displayFixture(fixtureID);
+                int fixtureID = Convert.ToInt32(cboSelectFixture.SelectedItem);
+                String label = Fixture.displayFixture(fixtureID);
+                lblDisplayFixture.Text = label;
             }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            int FixtureID = Convert.ToInt32(cboSelectFixture.SelectedItem);
             DateTime fixtureDate = dtpFixtureDate.Value;
+            String fixtureTime = (String)cboFixtureTime.SelectedItem;
 
             if (fixtureDate < DateTime.Today) {
                 MessageBox.Show("This is an invalid date.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dtpFixtureDate.Focus();
                 return;
             }
+            if (cboFixtureTime.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a time.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cboFixtureTime.Focus();
+                return;
+            }
 
             else {
+                Fixture UpdateFixture = new Fixture(FixtureID, fixtureDate, fixtureTime);
+
+                UpdateFixture.updateFixture();
+
                 MessageBox.Show("This Fixture was updated.", "Fixture updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cboSelectFixture.SelectedIndex = -1;
                 dtpFixtureDate.Value = DateTime.Now;
-
-
             }
         }
 

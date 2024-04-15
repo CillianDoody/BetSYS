@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +47,11 @@ namespace BetSYS
 
         public Customer(String Email) {
             this.Email = Email;
+        }
+
+        public Customer(int AccountID)
+        {
+            this.AccountID = AccountID;
         }
         public static int generateAccountID() {
             //open a db connection
@@ -119,7 +125,6 @@ namespace BetSYS
             
         }
         public void CloseAccount () {
-            Console.WriteLine(this.Email);
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
 
             String sqlQuery = "UPDATE Customers SET Status = 'c' WHERE Email = '" + this.Email + "'";
@@ -156,6 +161,112 @@ namespace BetSYS
             cmd2.ExecuteNonQuery();
             conn.Close();
         }
+
+        public static DataSet fillAccountIds()
+        {
+            //Open a db connection
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            //Define the SQL query to be executed
+            String sqlQuery = "SELECT * FROM Customers";
+
+            //Execute the SQL query (OracleCommand)
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+
+            DataSet ds = new DataSet();
+            da.Fill(ds, "AccountID");
+
+            //Close db connection
+            conn.Close();
+
+            return ds;
+        }
+
+        public static String displayUser(int accountID)
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            String sqlQuery = "SELECT forename, surname, balance FROM Customers WHERE AccountID = " + accountID;
+
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            reader.Read();
+
+            String forename = reader.GetString(0);
+            String surname = reader.GetString(1);
+            String balance = reader.GetString(2);
+            conn.Close();
+
+            String label = "Logged in as: " + forename + " " + surname + " your balance is €" + balance;
+
+            return label;
+        }
+
+        public static String displayUserName(int accountID)
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            String sqlQuery = "SELECT forename, surname FROM Customers WHERE AccountID = " + accountID;
+
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            reader.Read();
+
+            String forename = reader.GetString(0);
+            String surname = reader.GetString(1);
+            conn.Close();
+
+            String label = "Logged in as: " + forename + " " + surname;
+
+            return label;
+        }
+        public static double retrieveBalance(int accountID)
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            String sqlQuery = "SELECT balance FROM Customers WHERE AccountID = " + accountID;
+
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            reader.Read();
+
+            double balance = Convert.ToDouble(reader.GetString(0));
+            conn.Close();
+
+            return balance;
+        }
+
+        public void adjustBalance(double Amount)
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            String sqlQuery = "SELECT Balance FROM Customers WHERE AccountID = '" + this.AccountID + "'";
+
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            double currentBalance;
+            reader.Read();
+
+            currentBalance = Convert.ToDouble(reader.GetString(0));
+            double newBalance = currentBalance - Amount;
+            conn.Close();
+
+            String sqlQuery2 = "UPDATE Customers SET balance = '" + newBalance + "' WHERE AccountID = '" + this.AccountID + "'";
+
+            OracleCommand cmd2 = new OracleCommand(sqlQuery2, conn);
+            conn.Open();
+
+
+            cmd2.ExecuteNonQuery();
+            conn.Close();
+        }
+
     }
 }
 

@@ -19,8 +19,9 @@ namespace BetSYS
         String FTime {  get; set; }
         int score1 { get; set; }
         int score2 { get; set; }
+        char betStatus { get; set; }
 
-        public Fixture(int fixtureID, String Team1, String Team2, double OddsTeam1, double OddsTeam2, DateTime FDate, String FTime, int score1, int score2) {
+        public Fixture(int fixtureID, String Team1, String Team2, double OddsTeam1, double OddsTeam2, DateTime FDate, String FTime, int score1, int score2, char betStatus) {
             this.fixtureID = fixtureID;
             this.Team1 = Team1;
             this.Team2 = Team2;
@@ -30,6 +31,7 @@ namespace BetSYS
             this.FTime = FTime;
             this.score1 = score1;
             this.score2 = score2;
+            this.betStatus = betStatus;
         }
         public Fixture()
         {
@@ -42,12 +44,20 @@ namespace BetSYS
             this.FTime = "";
             this.score1 = 0;
             this.score2 = 0;
+            this.betStatus = 'U';
         }
 
-        public Fixture(int fixtureID) { 
-            this.fixtureID = fixtureID;
+        public Fixture(int FixtureID, DateTime FDate, String FTime)
+        {
+            this.fixtureID = FixtureID;
+            this.FDate = FDate;
+            this.FTime = FTime;
         }
 
+        public Fixture(int FixtureID)
+        {
+            this.fixtureID = FixtureID;
+        }
         public static DataSet fillTeams()
         {
             //Open a db connection
@@ -97,7 +107,7 @@ namespace BetSYS
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
 
             //Define the SQL query to be executed
-            String sqlQuery = "SELECT * FROM Fixtures";
+            String sqlQuery = "SELECT * FROM Fixtures WHERE FStatus = 'U'";
 
             //Execute the SQL query (OracleCommand)
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
@@ -111,6 +121,94 @@ namespace BetSYS
             conn.Close();
 
             return ds;
+        }
+
+        public static DataSet fillFixtureTeam1(int fixtureID)
+        {
+            //Open a db connection
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            //Define the SQL query to be executed
+            String sqlQuery = "SELECT Team1 FROM Fixtures WHERE FixtureID = " + fixtureID;
+
+            //Execute the SQL query (OracleCommand)
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+
+            DataSet ds = new DataSet();
+            da.Fill(ds, "Team1");
+
+            //Close db connection
+            conn.Close();
+
+            return ds;
+        }
+
+        public static DataSet fillFixtureTeam2(int fixtureID)
+        {
+            //Open a db connection
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            //Define the SQL query to be executed
+            String sqlQuery = "SELECT Team2 FROM Fixtures WHERE FixtureID = " + fixtureID;
+
+            //Execute the SQL query (OracleCommand)
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+
+            DataSet ds = new DataSet();
+            da.Fill(ds, "Team2");
+
+            //Close db connection
+            conn.Close();
+
+            return ds;
+        }
+
+        public static double fillOddsTeam1(int fixtureID)
+        {
+            //open a db connection
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            //selecting the highest value fixture ID
+            String sqlQuery = "SELECT OddsTeam1 FROM Fixtures WHERE fixtureID = " + fixtureID;
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            double OddsTeam1;
+            reader.Read();
+
+            OddsTeam1 = Convert.ToDouble(reader.GetString(0));
+
+            conn.Close();
+
+            return OddsTeam1;
+        }
+
+        public static double fillOddsTeam2(int fixtureID)
+        {
+            //open a db connection
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            //selecting the highest value fixture ID
+            String sqlQuery = "SELECT OddsTeam2 FROM Fixtures WHERE fixtureID = " + fixtureID;
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            double OddsTeam1;
+            reader.Read();
+
+            OddsTeam1 = Convert.ToDouble(reader.GetString(0));
+
+            conn.Close();
+
+            return OddsTeam1;
         }
 
 
@@ -157,7 +255,8 @@ namespace BetSYS
                 this.FDate.ToString("dd-MMM-yyyy") + "', '" +
                 this.FTime + "', '" + 
                 this.score1 + "', '" +
-                this.score2 + "')";
+                this.score2 + "', '" + 
+                this.betStatus + "')";
 
             //execute sql query
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
@@ -168,11 +267,9 @@ namespace BetSYS
             //close db connection
             conn.Close();
         }
-        public string displayFixture(int fixtureID) {
-            this.fixtureID = fixtureID;
+        public static String displayFixture(int fixtureID) {
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
-            String sqlQuery = "SELECT Team1 FROM Fixtures WHERE FixutreID = " + this.fixtureID;
-            String sqlQuery2 = "SELECT Team2 FROM Fixtures WHERE FixutreID = " + this.fixtureID;
+            String sqlQuery = "SELECT Team1, Team2 FROM Fixtures WHERE FixtureID = " + fixtureID + " AND FStatus = 'U'";
 
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
             conn.Open();
@@ -184,9 +281,144 @@ namespace BetSYS
             String Team2 = reader.GetString(1);
             conn.Close();
 
-            String label = Team1 + "vs " + Team2;
+            String label = Team1 + " vs " + Team2;
 
             return label;
+        }
+        public void updateFixture()
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            String sqlQuery = "UPDATE Fixtures SET FDate =  '" + this.FDate.ToString("dd-MMM-yyyy") + 
+                "', FTime = '" + this.FTime + "' WHERE FixtureID = " + this.fixtureID;
+
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public void AdjustOddsTeam1() {
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            String sqlQuery = "SELECT OddsTeam1, OddsTeam2 FROM Fixtures WHERE FixtureID = " + this.fixtureID;
+
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            double currentTeam1Odds;
+            double currentTeam2Odds;
+            reader.Read();
+
+            currentTeam1Odds = Convert.ToDouble(reader.GetString(0));
+            currentTeam2Odds = Convert.ToDouble(reader.GetString(1));
+
+            double newTeam1Odds = currentTeam1Odds - 0.01;
+            if(newTeam1Odds < 1.00)
+            {
+                newTeam1Odds = 1.00;
+            }
+            double newTeam2Odds = currentTeam2Odds + 0.01;
+            conn.Close();
+
+            String sqlQuery2 = "UPDATE Fixtures SET OddsTeam1 =  " + newTeam1Odds +
+                ", OddsTeam2 = " + newTeam2Odds + " WHERE FixtureID = " + this.fixtureID;
+
+            OracleCommand cmd2 = new OracleCommand(sqlQuery2, conn);
+            conn.Open();
+
+
+            cmd2.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public void AdjustOddsTeam2()
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            String sqlQuery = "SELECT OddsTeam1, OddsTeam2 FROM Fixtures WHERE FixtureID = " + this.fixtureID;
+
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            double currentTeam1Odds;
+            double currentTeam2Odds;
+            reader.Read();
+
+            currentTeam1Odds = Convert.ToDouble(reader.GetString(0));
+            currentTeam2Odds = Convert.ToDouble(reader.GetString(1));
+
+            double newTeam2Odds = currentTeam2Odds - 0.01;
+            if (newTeam2Odds < 1.00)
+            {
+                newTeam2Odds = 1.00;
+            }
+            double newTeam1Odds = currentTeam1Odds + 0.01;
+            conn.Close();
+
+            String sqlQuery2 = "UPDATE Fixtures SET OddsTeam1 =  " + newTeam1Odds +
+                ", OddsTeam2 = " + newTeam2Odds + " WHERE FixtureID = " + this.fixtureID;
+
+            OracleCommand cmd2 = new OracleCommand(sqlQuery2, conn);
+            conn.Open();
+
+
+            cmd2.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public static String displayTeam1(int fixtureID)
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            String sqlQuery = "SELECT Team1 FROM Fixtures WHERE FixtureID = " + fixtureID + " AND FStatus = 'U'";
+
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            reader.Read();
+
+            String Team1 = reader.GetString(0);
+            conn.Close();
+
+            String label = Team1;
+
+            return label;
+        }
+
+        public static String displayTeam2(int fixtureID)
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            String sqlQuery = "SELECT Team2 FROM Fixtures WHERE FixtureID = " + fixtureID + " AND FStatus = 'U'";
+
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            reader.Read();
+
+            String Team2 = reader.GetString(0);
+            conn.Close();
+
+            String label = Team2;
+
+            return label;
+        }
+
+        public void updateFixtureStatus()
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            String sqlQuery = "UPDATE Fixtures SET FStatus = 'P' WHERE FixtureID = " + this.fixtureID;
+
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            conn.Open();
+
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
         }
     }
 

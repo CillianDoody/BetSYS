@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bets.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="DBConnect.cs" />
     <Compile Include="Fixture.cs" />

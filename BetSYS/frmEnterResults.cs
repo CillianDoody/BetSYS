@@ -50,6 +50,11 @@ namespace BettingSYS
         {
             String score1 = txtScore1.Text;
             String score2 = txtScore2.Text;
+            int score1AsInt = Convert.ToInt32(score1);
+            int score2AsInt = Convert.ToInt32(score2);
+            String Team1 = lblTeam1.Text;
+            String Team2 = lblTeam2.Text;
+            int fixtureID = Convert.ToInt32(cboSelectFixture.SelectedItem);
 
             if (cboSelectFixture.SelectedIndex == -1) {
                 MessageBox.Show("You must enter a fixture.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -68,12 +73,65 @@ namespace BettingSYS
                 txtScore2.Focus();
                 return;
             }
-
+            
             else {
+                
+                Fixture setStatus = new Fixture(fixtureID);
+                if (score1AsInt > score2AsInt)
+                {
+                    Bets payOutWinners = new Bets(Team1, fixtureID);
+                    payOutWinners.payOutBet();
+                    payOutWinners.setBetStatus();
+                    setStatus.updateFixtureStatus();
+                }
+                if (score1AsInt < score2AsInt)
+                {
+                    Bets payOutWinners = new Bets(Team2, fixtureID);
+                    payOutWinners.payOutBet();
+                    payOutWinners.setBetStatus();
+
+                    setStatus.updateFixtureStatus();
+                }
+                else
+                {
+                    Bets payOutWinners = new Bets(Team1, fixtureID);
+                    payOutWinners.setBetStatus();
+                    setStatus.updateFixtureStatus();
+                }
                 MessageBox.Show("The result has been entered.", "Result Updated", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 cboSelectFixture.SelectedIndex = -1;
+                cboSelectFixture.Items.Clear();
+                //Load IDs into ComboBox
+                DataSet ds = Fixture.fillFixtureIds();
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    cboSelectFixture.Items.Add(ds.Tables[0].Rows[i][0]);
+                }
+                grpEnterResult.Visible = false;
                 txtScore1.Text = "0";
                 txtScore2.Text = "0";
+            }
+        }
+
+        private void frmEnterResults_Load(object sender, EventArgs e)
+        {
+            //Load IDs into ComboBox
+            DataSet ds = Fixture.fillFixtureIds();
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                cboSelectFixture.Items.Add(ds.Tables[0].Rows[i][0]);
+            }
+        }
+
+        private void cboSelectFixture_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboSelectFixture.SelectedIndex != -1)
+            {
+                int fixtureID = Convert.ToInt32(cboSelectFixture.SelectedItem);
+                grpEnterResult.Visible = true;
+                lblTeam1.Text = Fixture.displayTeam1(fixtureID);
+                lblTeam2.Text = Fixture.displayTeam2(fixtureID);
             }
         }
     }
