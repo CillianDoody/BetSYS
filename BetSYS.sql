@@ -7,7 +7,7 @@ DROP TABLE Customers;
 
 --Creating table Customers
 CREATE TABLE Customers(
-AccountID varchar2(10) NOT NULL,
+AccountID numeric(3) NOT NULL,
 Forename varchar2(20) NOT NULL,
 Surname varchar2(20) NOT NULL,
 DOB date NOT NULL, 
@@ -30,7 +30,7 @@ CONSTRAINT PK_FixtureTime PRIMARY KEY (FixtureTime));
 
 --Creating table Fixtures
 CREATE TABLE Fixtures(
-FixtureID varchar2(10) NOT NULL,
+FixtureID numeric(3) NOT NULL,
 Team1 varchar2(25) NOT NULL,
 Team2 varchar2(25) NOT NULL,
 OddsTeam1 numeric(4,2) NOT NULL,
@@ -46,14 +46,14 @@ FOREIGN KEY (Team1) REFERENCES Teams(TeamName),
 FOREIGN KEY (Team2) REFERENCES Teams(TeamName));
 
 CREATE TABLE Bets(
-BetID varchar2(10) NOT NULL,
+BetID numeric(3) NOT NULL,
 BetAmount numeric (5,2) NOT NULL,
 BetOdds numeric (4,2) NOT NULL,
 BetStatus char(1) NOT NULL,
 BetDate date NOT NULL,
 Team varchar2(25) NOT NULL,
-FixtureID varchar2(10) NOT NULL,
-AccountID varchar2(10) NOT NULL,
+FixtureID numeric(3) NOT NULL,
+AccountID numeric(3) NOT NULL,
 FOREIGN KEY (Team) REFERENCES Teams(TeamName),
 FOREIGN KEY (FixtureID) REFERENCES Fixtures(FixtureID),
 FOREIGN KEY (AccountID) REFERENCES Customers(AccountID));

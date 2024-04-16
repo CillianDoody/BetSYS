@@ -126,6 +126,7 @@ namespace BetSYS
                 cboSelectTeam.Items.Clear();
                 cboSelectTeam.Text = "Select Team";
                 cboSelectFixture.SelectedIndex = -1;
+                grpPlaceBet.Visible = false;
             } 
 
         }
@@ -141,28 +142,24 @@ namespace BetSYS
                 lblAmount.Visible = true;
             }
             String AmountText = txtAmount.Text;
+            double Odds = 1.00;
             double AmountReturned = 0;
+            if (cboSelectTeam.SelectedIndex == 0)
+            {
+                int fixtureID = Convert.ToInt32(cboSelectFixture.SelectedItem);
+                Odds = Fixture.fillOddsTeam1(fixtureID);
+                lblOdds.Text = Convert.ToString(Odds);
+            }
+            if (cboSelectTeam.SelectedIndex == 1)
+            {
+                int fixtureID = Convert.ToInt32(cboSelectFixture.SelectedItem);
+                Odds = Fixture.fillOddsTeam2(fixtureID);
+                lblOdds.Text = Convert.ToString(Odds);
+            }
             if (!AmountText.Equals("")){
                 int Amount = Convert.ToInt32(AmountText);
-    
-                if (cboSelectTeam.SelectedIndex == 0) {
-                    int fixtureID = Convert.ToInt32(cboSelectFixture.SelectedItem);
-                    double Odds = Fixture.fillOddsTeam1(fixtureID);
-                    lblOdds.Text = Convert.ToString(Odds);
-                    lblOddsText.Visible = true;
-                    lblOdds.Visible = true;
-                    AmountReturned = Amount + (Amount * Odds);
-                    lblPotentialReturn.Text = "€ " + Convert.ToString(AmountReturned);
-                }
-                if (cboSelectTeam.SelectedIndex == 1) {
-                    int fixtureID = Convert.ToInt32(cboSelectFixture.SelectedItem);
-                    double Odds = Fixture.fillOddsTeam2(fixtureID);
-                    lblOdds.Text = Convert.ToString(Odds);
-                    lblOddsText.Visible = true;
-                    lblOdds.Visible = true;
-                    AmountReturned = Amount + (Amount * Odds);
-                    lblPotentialReturn.Text = "€ " + Convert.ToString(AmountReturned);
-                }
+                AmountReturned = Amount + (Amount * Odds);
+                lblPotentialReturn.Text = "€ " + Convert.ToString(AmountReturned);
             }
         }
         
@@ -214,9 +211,11 @@ namespace BetSYS
 
         private void cboSelectUser_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(cboSelectUser.SelectedIndex != -1){
             int accountID = Convert.ToInt32(cboSelectUser.SelectedItem);
             String label = Customer.displayUser(accountID);
-            lblLogStatus.Text = label;
+                lblLogStatus.Text = label;
+            }
         }
     }
 }

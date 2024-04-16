@@ -48,7 +48,7 @@ namespace BetSYS
             //open a db connection
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
 
-            //selecting the highest value fixture ID
+            //selecting the highest value Bet ID
             String sqlQuery = "SELECT MAX(BetID) FROM Bets";
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
             conn.Open();

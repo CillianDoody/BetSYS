@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BetSYS
 {
@@ -419,6 +420,32 @@ namespace BetSYS
 
             cmd.ExecuteNonQuery();
             conn.Close();
+        }
+        public static void displayFixtures(DataGridView dataGrid)
+        {
+            OracleConnection conn = new OracleConnection( DBConnect.oraDB);
+
+            String sqlQuery = "SELECT * FROM Fixtures WHERE FStatus = 'U'";
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+
+            conn.Open();
+
+            OracleDataReader reader = cmd.ExecuteReader();
+
+            if(dataGrid.Columns.Count == 0)
+            {
+                dataGrid.Columns.Add("Team1", "Team1");
+                dataGrid.Columns.Add("Team2", "Team2");
+                dataGrid.Columns.Add("FDate", "FDate");
+                dataGrid.Columns.Add("FTime", "FTime");
+            }
+            dataGrid.Rows.Clear();
+
+            while(reader.Read())
+            {
+                dataGrid.Rows.Add(reader["Team1"], reader["Team2"], 
+                    reader["FDate"].ToString().Substring(0,10), reader["FTime"].ToString());
+            }
         }
     }
 

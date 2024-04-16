@@ -58,14 +58,14 @@
             this.mnuBack});
             this.mnuBackToMenu.Location = new System.Drawing.Point(0, 0);
             this.mnuBackToMenu.Name = "mnuBackToMenu";
-            this.mnuBackToMenu.Size = new System.Drawing.Size(800, 30);
+            this.mnuBackToMenu.Size = new System.Drawing.Size(800, 24);
             this.mnuBackToMenu.TabIndex = 3;
             this.mnuBackToMenu.Text = "menuStrip1";
             // 
             // mnuBack
             // 
             this.mnuBack.Name = "mnuBack";
-            this.mnuBack.Size = new System.Drawing.Size(113, 24);
+            this.mnuBack.Size = new System.Drawing.Size(92, 20);
             this.mnuBack.Text = "Back to menu";
             this.mnuBack.Click += new System.EventHandler(this.mnuBack_Click);
             // 
@@ -83,7 +83,7 @@
             this.lblSelectFixture.AutoSize = true;
             this.lblSelectFixture.Location = new System.Drawing.Point(252, 94);
             this.lblSelectFixture.Name = "lblSelectFixture";
-            this.lblSelectFixture.Size = new System.Drawing.Size(84, 15);
+            this.lblSelectFixture.Size = new System.Drawing.Size(74, 13);
             this.lblSelectFixture.TabIndex = 7;
             this.lblSelectFixture.Text = "Select Fixture:";
             // 
@@ -113,7 +113,7 @@
             this.lblDisplayFixture.AutoSize = true;
             this.lblDisplayFixture.Location = new System.Drawing.Point(128, 27);
             this.lblDisplayFixture.Name = "lblDisplayFixture";
-            this.lblDisplayFixture.Size = new System.Drawing.Size(105, 15);
+            this.lblDisplayFixture.Size = new System.Drawing.Size(93, 13);
             this.lblDisplayFixture.TabIndex = 21;
             this.lblDisplayFixture.Text = "Team1 vs Team 2";
             // 
@@ -122,7 +122,7 @@
             this.lblPotentialReturn.AutoSize = true;
             this.lblPotentialReturn.Location = new System.Drawing.Point(207, 178);
             this.lblPotentialReturn.Name = "lblPotentialReturn";
-            this.lblPotentialReturn.Size = new System.Drawing.Size(14, 15);
+            this.lblPotentialReturn.Size = new System.Drawing.Size(13, 13);
             this.lblPotentialReturn.TabIndex = 20;
             this.lblPotentialReturn.Text = "€";
             this.lblPotentialReturn.Visible = false;
@@ -132,7 +132,7 @@
             this.lblPotentialReturnText.AutoSize = true;
             this.lblPotentialReturnText.Location = new System.Drawing.Point(16, 178);
             this.lblPotentialReturnText.Name = "lblPotentialReturnText";
-            this.lblPotentialReturnText.Size = new System.Drawing.Size(135, 15);
+            this.lblPotentialReturnText.Size = new System.Drawing.Size(118, 13);
             this.lblPotentialReturnText.TabIndex = 19;
             this.lblPotentialReturnText.Text = "Your potential return is: ";
             this.lblPotentialReturnText.Visible = false;
@@ -142,10 +142,9 @@
             this.lblOdds.AutoSize = true;
             this.lblOdds.Location = new System.Drawing.Point(264, 140);
             this.lblOdds.Name = "lblOdds";
-            this.lblOdds.Size = new System.Drawing.Size(31, 15);
+            this.lblOdds.Size = new System.Drawing.Size(28, 13);
             this.lblOdds.TabIndex = 18;
             this.lblOdds.Text = "1.00";
-            this.lblOdds.Visible = false;
             this.lblOdds.Click += new System.EventHandler(this.lblOdds_Click);
             // 
             // label1
@@ -153,7 +152,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(86, 165);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 15);
+            this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 17;
             // 
             // lblOddsText
@@ -161,10 +160,9 @@
             this.lblOddsText.AutoSize = true;
             this.lblOddsText.Location = new System.Drawing.Point(16, 140);
             this.lblOddsText.Name = "lblOddsText";
-            this.lblOddsText.Size = new System.Drawing.Size(242, 15);
+            this.lblOddsText.Size = new System.Drawing.Size(208, 13);
             this.lblOddsText.TabIndex = 16;
             this.lblOddsText.Text = "The odds (Decimal) of this team winning is:";
-            this.lblOddsText.Visible = false;
             // 
             // txtAmount
             // 
@@ -180,7 +178,7 @@
             this.lblAmount.AutoSize = true;
             this.lblAmount.Location = new System.Drawing.Point(16, 103);
             this.lblAmount.Name = "lblAmount";
-            this.lblAmount.Size = new System.Drawing.Size(217, 15);
+            this.lblAmount.Size = new System.Drawing.Size(191, 13);
             this.lblAmount.TabIndex = 14;
             this.lblAmount.Text = "Enter the amount you would like to bet:";
             this.lblAmount.Visible = false;
@@ -200,7 +198,7 @@
             this.lblSelectTeam.AutoSize = true;
             this.lblSelectTeam.Location = new System.Drawing.Point(16, 60);
             this.lblSelectTeam.Name = "lblSelectTeam";
-            this.lblSelectTeam.Size = new System.Drawing.Size(189, 15);
+            this.lblSelectTeam.Size = new System.Drawing.Size(166, 13);
             this.lblSelectTeam.TabIndex = 12;
             this.lblSelectTeam.Text = "Select the team you think will win:";
             // 
@@ -219,7 +217,7 @@
             this.lblSelectUser.AutoSize = true;
             this.lblSelectUser.Location = new System.Drawing.Point(252, 28);
             this.lblSelectUser.Name = "lblSelectUser";
-            this.lblSelectUser.Size = new System.Drawing.Size(73, 15);
+            this.lblSelectUser.Size = new System.Drawing.Size(65, 13);
             this.lblSelectUser.TabIndex = 15;
             this.lblSelectUser.Text = "Select User:";
             // 
@@ -237,7 +235,7 @@
             this.lblLogStatus.AutoSize = true;
             this.lblLogStatus.Location = new System.Drawing.Point(252, 61);
             this.lblLogStatus.Name = "lblLogStatus";
-            this.lblLogStatus.Size = new System.Drawing.Size(157, 15);
+            this.lblLogStatus.Size = new System.Drawing.Size(137, 13);
             this.lblLogStatus.TabIndex = 17;
             this.lblLogStatus.Text = "Logged in as: Not logged in";
             // 

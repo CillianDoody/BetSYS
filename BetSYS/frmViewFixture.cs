@@ -28,5 +28,15 @@ namespace BetSYS
             this.Close();
             parent.Visible = true;
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void frmViewFixture_Load(object sender, EventArgs e)
+        {
+            Fixture.displayFixtures(dgvViewFixtures);
+        }
     }
 }
