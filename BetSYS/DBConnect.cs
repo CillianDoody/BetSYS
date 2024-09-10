@@ -11,7 +11,8 @@ namespace BetSYS
     {
 
         //public const String oraDB = "Data Source = localhost/orcl; User ID = C##User1; Password = 123456;"; //When using laptop
-        public const String oraDB = "Data Source = studentoracle:1521/orcl; User ID = t00226269; Password = qgrpDtxthq7#;"; //When in MTU Lab
+        public const String oraDB = "Data Source = studentoracle:1521/orcl; User ID = ;"//My college number 
+            "Password = ;"; //My college password. When in MTU Lab
 
     }
 }
